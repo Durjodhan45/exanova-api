@@ -28,14 +28,10 @@ async function bootstrap() {
   app.use(urlencoded({ extended: true, limit: maxLimit }));
 
   // 3. CORS Configuration
-  const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:5173';
   app.enableCors({
     origin: [
-      frontendUrl,
-      'http://localhost:5173',
-      'http://localhost:3000',
-      'http://localhost:5174',
-      /\.vercel\.app$/,
+      'https://exanova.vercel.app',
+      'https://exanova.vercel.app/',
     ],
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
