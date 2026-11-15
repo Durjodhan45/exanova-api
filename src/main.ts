@@ -32,6 +32,10 @@ async function bootstrap() {
     origin: [
       'https://exanova.vercel.app',
       'https://exanova.vercel.app/',
+      'http://localhost:3000',
+      'http://localhost:3000/',
+      'http://localhost:5173',
+      'http://localhost:5173/',
     ],
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
