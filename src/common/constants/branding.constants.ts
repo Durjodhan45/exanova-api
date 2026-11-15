@@ -6,6 +6,7 @@ export const BRANDING = {
   github: 'https://github.com/Durjodhan45',
   email: 'info@ticollege.ac.in',
   address: 'EM-4/1, EM Block, Sector V, Bidhannagar, Kolkata, West Bengal 700091, India.',
+  version: '1.0.0',
   colors: {
     midnightNavy: '#101B3F',
     royalPurple: '#6246EA',

@@ -3,7 +3,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from '../src/app.module.js';
 import { ValidationPipe, VersioningType } from '@nestjs/common';
 import helmet from 'helmet';
-import { GlobalExceptionFilter } from '../src/common/filters/global-exception.filter.js';
+
 import { TransformInterceptor } from '../src/common/interceptors/transform.interceptor.js';
 import { LoggingInterceptor } from '../src/common/interceptors/logging.interceptor.js';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
@@ -11,6 +11,7 @@ import { BRANDING } from '../src/common/constants/branding.constants.js';
 import type { Request, Response } from 'express';
 import express from 'express';
 import { ExpressAdapter } from '@nestjs/platform-express';
+import { GlobalExceptionFilter } from '../src/common/filters/http-exception.filter.js';
 
 const server = express();
 let isAppInitialized = false;
@@ -20,7 +21,7 @@ async function bootstrap() {
 
   app.use(helmet());
   app.enableCors({
-    origin: (origin, callback) => {
+    origin: (origin: any, callback: any) => {
       const allowedOrigins = (process.env.CORS_ORIGIN || '*').split(',').map((o) => o.trim());
       if (!origin || allowedOrigins.includes('*') || allowedOrigins.includes(origin)) {
         callback(null, true);
@@ -53,15 +54,15 @@ async function bootstrap() {
   app.useGlobalInterceptors(new LoggingInterceptor(), new TransformInterceptor());
 
   const config = new DocumentBuilder()
-    .setTitle(`${BRANDING.APP_NAME} API`)
+    .setTitle(`${BRANDING.appName} API`)
     .setDescription(
-      `Backend REST API for ${BRANDING.APP_NAME} – ${BRANDING.TAGLINE}.\n\n` +
-        `**Organization:** ${BRANDING.ORGANIZATION}\n\n` +
-        `**Address:** ${BRANDING.ADDRESS}\n\n` +
-        `**Developer:** ${BRANDING.DEVELOPER.NAME} (<${BRANDING.DEVELOPER.EMAIL}>)\n\n` +
-        `**GitHub:** ${BRANDING.DEVELOPER.GITHUB}`,
+      `Backend REST API for ${BRANDING.appName} – ${BRANDING.tagline}.\n\n` +
+        `**Organization:** ${BRANDING.organization}\n\n` +
+        `**Address:** ${BRANDING.address}\n\n` +
+        `**Developer:** ${BRANDING.developer} (<${BRANDING.email}>)\n\n` +
+        `**GitHub:** ${BRANDING.github}`,
     )
-    .setVersion(BRANDING.VERSION)
+    .setVersion(BRANDING.version)
     .addBearerAuth(
       {
         type: 'http',
@@ -75,12 +76,12 @@ async function bootstrap() {
 
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api/docs', app, document, {
-    customSiteTitle: `${BRANDING.APP_NAME} API Documentation`,
+    customSiteTitle: `${BRANDING.appName} API Documentation`,
     customCss: `
-      .swagger-ui .topbar { background-color: ${BRANDING.COLORS.MIDNIGHT_NAVY}; }
+      .swagger-ui .topbar { background-color: ${BRANDING.colors.midnightNavy}; }
       .swagger-ui .topbar-wrapper img { content: url('https://raw.githubusercontent.com/Durjodhan45/exanova-api/main/docs/logo.png'); height: 40px; }
-      .swagger-ui .info hgroup.main a { color: ${BRANDING.COLORS.ROYAL_PURPLE}; }
-      .swagger-ui .btn.authorize { background-color: ${BRANDING.COLORS.ROYAL_PURPLE}; color: #fff; border-color: ${BRANDING.COLORS.ROYAL_PURPLE}; }
+      .swagger-ui .info hgroup.main a { color: ${BRANDING.colors.royalPurple}; }
+      .swagger-ui .btn.authorize { background-color: ${BRANDING.colors.royalPurple}; color: #fff; border-color: ${BRANDING.colors.royalPurple}; }
     `,
   });
 
