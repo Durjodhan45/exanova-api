@@ -1,0 +1,21 @@
+export const BRANDING = {
+  appName: 'ExaNova',
+  tagline: 'Smart Examination for a Smarter Future.',
+  developer: 'Durjodhan Mondal',
+  organization: 'Techno Main Salt Lake',
+  github: 'https://github.com/Durjodhan45',
+  email: 'info@ticollege.ac.in',
+  address: 'EM-4/1, EM Block, Sector V, Bidhannagar, Kolkata, West Bengal 700091, India.',
+  colors: {
+    midnightNavy: '#101B3F',
+    royalPurple: '#6246EA',
+    deepPurple: '#4530B5',
+    white: '#FFFFFF',
+    softGray: '#F5F6FA',
+    gold: '#D4AF37',
+    successGreen: '#16A34A',
+    warningAmber: '#F59E0B',
+    errorRed: '#DC2626',
+    slateGray: '#64748B',
+  },
+} as const;

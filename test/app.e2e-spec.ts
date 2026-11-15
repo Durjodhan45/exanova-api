@@ -20,7 +20,10 @@ describe('AppController (e2e)', () => {
     return request(app.getHttpServer())
       .get('/')
       .expect(200)
-      .expect('Hello World!');
+      .expect((res) => {
+        expect(res.body.name).toBe('ExaNova');
+        expect(res.body.developer).toBe('Durjodhan Mondal');
+      });
   });
 
   afterEach(async () => {
